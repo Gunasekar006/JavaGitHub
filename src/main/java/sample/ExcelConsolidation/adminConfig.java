@@ -23,13 +23,15 @@ public class adminConfig {
 		utlity.click(btnAdminConfig);
 		utlity.click(btnOk);
 		utlity.click(btnOk);
-		Assert.assertEquals(driver.getTitle(), "Index1", "Admin Config Loaded");
+		Assert.assertEquals(driver.getTitle(), "Index", "Admin Config Loaded");
 			
 		
 	}
 
 	public void adminConfigReferenceMapping() {
-
+		//*[contains(text(),'References')]
+		String sam="test";
+		
 	}
 
 }
