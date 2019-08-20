@@ -45,86 +45,86 @@ public class App {
 	public int lastRow;
 	public int lastColumn;
 	public Properties prop;
-	
-	
+
 	@BeforeSuite
 	public void loadData() throws IOException {
-		
-		//Property declaration
-		prop=new Properties();
+
+		// Property declaration
+		prop = new Properties();
 		FileInputStream srcProp = new FileInputStream("Resource/config.properties");
 		prop.load(srcProp);
-		
+
 	}
 
 	@BeforeTest
-	public void initializeDriver() throws  IOException {
+	public void initializeDriver() throws IOException {
 
-	String url=prop.getProperty("url");
-	File src = new File("C:/Users/gkumarasamy/Desktop/valid_1.xlsx");
-	FileInputStream fis = new FileInputStream(src);
-	book = new XSSFWorkbook(fis);
-
-	
-	
+		String url = prop.getProperty("url");
+		File src = new File("C:/Users/gkumarasamy/Desktop/valid_1.xlsx");
+		FileInputStream fis = new FileInputStream(src);
+		book = new XSSFWorkbook(fis);
 
 		System.setProperty("webdriver.chrome.driver", "src/main/java/chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.get(url);
 		driver.manage().window().maximize();
-		System.out.println("App instance: "+this.driver);
-		
-}
+		System.out.println("App instance: " + this.driver);
+
+	}
 
 	@Test
 	public void enterData() throws InterruptedException {
 		sheet = book.getSheetAt(0);
 		lastRow = sheet.getLastRowNum();
 		lastColumn = sheet.getRow(0).getLastCellNum();
-		System.out.println("Last Column: "+lastColumn);
+		System.out.println("Last Column: " + lastColumn);
 		System.out.println("Total entry:" + lastRow);
-		
+
 		Date d = new Date();
 		SimpleDateFormat sm = new SimpleDateFormat("ddMMyyyyhhmmss");
 		String name = sm.format(d);
 		driver.findElement(By.xpath(tempName)).sendKeys("ztest" + name);
-		
+
 		click("//*[@id='example']/tbody/tr[1]/td[1]/input");
-System.out.println("Waiting");
-		Thread.sleep(5000);
+		System.out.println("Waiting");
+		Thread.sleep(2000);
 		int execelRow = 1;
 		int appCol;
-		
-System.out.println("*******************");
+
+		System.out.println("*******************");
 		for (rowNum = 1; rowNum <= 50; rowNum++) {
-			
+
 			for (columnNum = 0; columnNum < lastColumn; columnNum++) {
-			
+				System.out.println(rowNum);
 				appCol = columnNum + 1;
 				Thread.sleep(1000);
 				sheet.getRow(execelRow).getCell(columnNum).setCellType(CellType.STRING);
-				String val = sheet.getRow(execelRow).getCell(columnNum).getStringCellValue();		
-				String tagName = driver
-						.findElement(By.xpath("//*[@id='example']/tbody/tr[" + rowNum + "]/td[" + appCol + "]/*"))
-						.getTagName();
-				Thread.sleep(1000);
-				if (tagName.contains("select")) {
+				String val = sheet.getRow(execelRow).getCell(columnNum).getStringCellValue();
+				if (!val.isEmpty()) {
+					String tagName = driver
+							.findElement(By.xpath("//*[@id='example']/tbody/tr[" + rowNum + "]/td[" + appCol + "]/*"))
+							.getTagName();
+					Thread.sleep(1000);
+					if (tagName.contains("select")) {
+						Select select = new Select(driver.findElement(
+								By.xpath("//*[@id='example']/tbody/tr[" + rowNum + "]/td[" + appCol + "]/select")));
+						select.selectByVisibleText(val);
 
-					
-					
-					Select select = new Select(driver.findElement(
-							By.xpath("//*[@id='example']/tbody/tr[" + rowNum + "]/td[" + appCol + "]/select")));
-					select.selectByVisibleText(val);
+					} else {
+						String appRowEntry = "//*[@id='example']/tbody/tr[" + rowNum + "]/td[" + appCol + "]/"
+								+ tagName;
+						enterValue(appRowEntry, val);
+					}
 
 				} else {
-					String appRowEntry="//*[@id='example']/tbody/tr[" + rowNum + "]/td[" + appCol + "]/" + tagName;
-					enterValue(appRowEntry,val);
+					System.out.println("no entry added");
 				}
 			}
 			execelRow++;
 			if (rowNum >= 50) {
 				driver.findElement(By.partialLinkText("Next")).click();
-				rowNum = 1;
+				System.out.println("90909090");
+				rowNum = 0;
 				appCol = 0;
 				columnNum = 0;
 				click("//*[@id='confirmOk']");
@@ -138,10 +138,10 @@ System.out.println("*******************");
 				break;
 			}
 		}
-		
-		adminConfig adminconfig=new adminConfig(driver);
+
+		adminConfig adminconfig = new adminConfig(driver);
 		adminconfig.adminConfigscreen();
-		
+
 	}
 
 	private void click(String string) {
@@ -149,17 +149,16 @@ System.out.println("*******************");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(string))).click();
 
 	}
-	
+
 	private void selectFromDropdown() {
-		
-		
+
 	}
-	
+
 	private void enterValue(String appRow, String val) {
 		WebDriverWait wait = new WebDriverWait(driver, 60);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(appRow))).sendKeys(val);;
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(appRow))).sendKeys(val);
+		;
 
-		
 	}
 
 	private void selectfromDorpdown(String fieldname, String fieldVal) {

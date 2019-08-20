@@ -2,32 +2,32 @@
 <testng-results skipped="0" failed="1" ignored="0" total="1" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="29610" started-at="2019-08-20T05:36:46Z" finished-at="2019-08-20T05:37:15Z">
+  <suite name="Default suite" duration-ms="59706" started-at="2019-08-20T11:58:55Z" finished-at="2019-08-20T11:59:55Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="29610" started-at="2019-08-20T05:36:46Z" finished-at="2019-08-20T05:37:15Z">
+    <test name="Default test" duration-ms="59706" started-at="2019-08-20T11:58:55Z" finished-at="2019-08-20T11:59:55Z">
       <class name="sample.ExcelConsolidation.App">
-        <test-method status="PASS" signature="loadData()[pri:0, instance:sample.ExcelConsolidation.App@5622fdf]" name="loadData" is-config="true" duration-ms="15" started-at="2019-08-20T05:36:46Z" finished-at="2019-08-20T05:36:46Z">
+        <test-method status="PASS" signature="loadData()[pri:0, instance:sample.ExcelConsolidation.App@4ac3c60d]" name="loadData" is-config="true" duration-ms="19" started-at="2019-08-20T11:58:55Z" finished-at="2019-08-20T11:58:55Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loadData -->
-        <test-method status="PASS" signature="initializeDriver()[pri:0, instance:sample.ExcelConsolidation.App@5622fdf]" name="initializeDriver" is-config="true" duration-ms="5576" started-at="2019-08-20T05:36:46Z" finished-at="2019-08-20T05:36:51Z">
+        <test-method status="PASS" signature="initializeDriver()[pri:0, instance:sample.ExcelConsolidation.App@4ac3c60d]" name="initializeDriver" is-config="true" duration-ms="26067" started-at="2019-08-20T11:58:55Z" finished-at="2019-08-20T11:59:21Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initializeDriver -->
-        <test-method status="FAIL" signature="enterData()[pri:0, instance:sample.ExcelConsolidation.App@5622fdf]" name="enterData" duration-ms="23998" started-at="2019-08-20T05:36:51Z" finished-at="2019-08-20T05:37:15Z">
+        <test-method status="FAIL" signature="enterData()[pri:0, instance:sample.ExcelConsolidation.App@4ac3c60d]" name="enterData" duration-ms="33583" started-at="2019-08-20T11:59:21Z" finished-at="2019-08-20T11:59:55Z">
           <exception class="java.lang.AssertionError">
             <message>
-              <![CDATA[Admin Config Loaded expected [Index1] but found [Index]]]>
+              <![CDATA[Admin Config Loaded expected [Index] but found [CreateTemplate]]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: Admin Config Loaded expected [Index1] but found [Index]
+              <![CDATA[java.lang.AssertionError: Admin Config Loaded expected [Index] but found [CreateTemplate]
 at org.testng.Assert.fail(Assert.java:96)
 at org.testng.Assert.failNotEquals(Assert.java:776)
 at org.testng.Assert.assertEqualsImpl(Assert.java:137)
 at org.testng.Assert.assertEquals(Assert.java:118)
 at org.testng.Assert.assertEquals(Assert.java:453)
-at sample.ExcelConsolidation.adminConfig.adminConfigscreen(adminConfig.java:26)
+at sample.ExcelConsolidation.adminConfig.adminConfigscreen(adminConfig.java:27)
 at sample.ExcelConsolidation.App.enterData(App.java:143)
 at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)

@@ -7,6 +7,7 @@ import basePack.UtlityClass;
 
 public class adminConfig {
 	WebDriver driver;
+	public UtlityClass utlity;
 
 	public adminConfig(WebDriver driver) {
 		this.driver = driver;
@@ -17,7 +18,7 @@ public class adminConfig {
 	public String btnOk = "//*[@id='confirmOk']";
 
 	public void adminConfigscreen() {
-		UtlityClass utlity = new UtlityClass(driver);
+		 utlity = new UtlityClass(driver);
 		System.out.println("Adminconfig instance: " + this.driver);
 		System.out.println("admin config loaded");
 		utlity.click(btnAdminConfig);
@@ -30,8 +31,37 @@ public class adminConfig {
 
 	public void adminConfigReferenceMapping() {
 		//*[contains(text(),'References')]
-		String sam="test";
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
 	}
 
 }
